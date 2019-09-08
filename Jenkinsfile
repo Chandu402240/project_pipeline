@@ -27,7 +27,7 @@ pipeline {
     }
     stage('Deploy/Run Container on DEV Server') {
       steps {
-        sh "docker rm -f flaskpipeline:${BUILD_NUMBER} || true"
+        sh "docker rm -f flaskpipeline || true"
         sh "docker run -p 5000:5000 -d --name flaskpipeline chandu402240/flaskpipeline:${BUILD_NUMBER}"
       }
     }
