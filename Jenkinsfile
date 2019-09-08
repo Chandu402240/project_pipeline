@@ -1,5 +1,5 @@
 pipeline {
-  agent { docker { image 'python:3.7.2' } }
+  agent any
   stages {
     stage('SCM Checkout') {
       steps {      
@@ -8,7 +8,7 @@ pipeline {
     }
     stage('test') {
       steps {
-        sh 'python project_test.py'
+        sh 'python project_tests.py'
       }
     }   
     stage('Build Docker Image') {
