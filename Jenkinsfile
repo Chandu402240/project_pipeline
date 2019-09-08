@@ -1,21 +1,16 @@
 pipeline {
   agent { docker { image 'python:3.7.2' } }
   stages {
-    stage('build') {
-      steps {
-        sh 'pip install -r requirements.txt'
-      }
-    }
-    stage('test') {
-      steps {
-        sh 'python project_test.py'
-      }   
-    }
     stage('SCM Checkout') {
       steps {      
         git credentialsId: 'chandu402240', url: 'https://github.com/Chandu402240/project_pipeline.git'
       }
     }
+    stage('test') {
+      steps {
+        sh 'python project_test.py'
+      }
+    }   
     stage('Build Docker Image') {
       steps {
         sh "docker build -t flaskpipeline:${BUILD_NUMBER} ."
